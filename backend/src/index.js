@@ -7,14 +7,15 @@
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.flushHeaders();
  res.write(`data: ${new Date().toLocaleTimeString()}\n\n`);
-    const sendEvent = setTimeout(() => {
-        res.write(`data: ${new Date().toLocaleTimeString()}\n\n`);
+    const sendEvent = setInterval(() => {
+        res.write(`data: {note: this is sse test , date: ${new Date().toLocaleTimeString()}}\n\n`);
     }, 15000);
 
     res.on('close', () => {
-        clearTimeout(sendEvent);
+        clearInterval(sendEvent);
         res.end();
     });
 });

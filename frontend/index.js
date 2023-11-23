@@ -4,7 +4,7 @@ function start() {
         source = new EventSource("http://localhost:8000");
         source.onmessage = function(e) {
             console.log("🚀 ~ file: index.js:6 ~ start ~ e:", e)
-            document.getElementById("result").innerHTML = e.data;
+            document.getElementById("result").innerHTML += e.data + "<br/>";
         };
 
         source.onopen = function(e) {
